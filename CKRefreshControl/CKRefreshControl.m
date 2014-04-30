@@ -483,6 +483,8 @@ static void CKRefreshControl_UITableViewController_SetView(UITableViewController
               "movt %0, :upper16:(L_OBJC_CLASS_UIRefreshControl-(LPC0+4))\n"
               "LPC0: add %0, pc" : "=r"(UIRefreshControlClassRef)
               );
+#elif TARGET_CPU_ARM64
+        // no-op: All public arm64 code makes the UIRefreshControl class available, hence we will never hit this code-path.
 #elif TARGET_CPU_X86_64
         __asm("leaq L_OBJC_CLASS_UIRefreshControl(%%rip), %0" : "=r"(UIRefreshControlClassRef));
 #elif TARGET_CPU_X86
